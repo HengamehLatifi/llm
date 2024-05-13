@@ -1,3 +1,33 @@
+# Documentation overview
+
+I used:
+- JSDOC
+- Visual Studio Code
+- ChatGPT
+- GItHub and Git
+
+jsdoc allow to standardize documentation through internal aspect of the codebase. During the week I documented the functionality of each function in the repository. JsDoc allowed me also to generate a website in order to have a place were to see al the available methods and variables, grouped by module. 
+
+All the modified code is available on Github. I also used GItHub Actions in order to generate the JsDoc website and host it on github pages. The website will be updated to every changes.
+To conclude, all the documentation its automatically implemented in VS Code, if you put the cursor over a documented function or variable is possible to see what that function will do, and how to use it (params + return).
+
+# My inputs
+
+Additionally these two vedios were really helpfull for documentation + live server:
+- [JSDoc crash course](https://youtu.be/lTCadytiCNs?si=GaoVkxOJAbQ9ZeIF)
+- [JSDoc](https://youtu.be/YK-GurROGIg?si=czRz66YIKOaFZ70N)
+- [HTML](https://youtu.be/EquuZUHjcPU?si=K6Ny_cZyyx6z5WqU)
+- [CSS](https://youtu.be/wvyYOFJAATk?si=tjSmNlUoem_ueNt7)
+- [CSS](https://youtu.be/HNeBLKF_BRY?si=Pfpc5HGpfpc1Z0hG)
+- [git](https://www.youtube.com/watch?v=8JJ101D3knE)
+- [JavaScript_1](https://youtu.be/gRkQIN1GB5I?si=kEiAi8pv-1cC87Ry)
+- [JavaScript_2](https://youtu.be/N4pNmwvXxUU?si=nFgUJQpHrRTrORov)
+- [JavaScript_3](https://youtu.be/QPFRvclGTmw?si=0_o83a0LtMRJYZwH)
+- [JavaScript Tutorial for Beginners](https://www.youtube.com/watch?v=W6NZfCO5SIk)
+
+
+
+---
 # llm: language models usage made easy
 
 Manipulate any language model from the command line.

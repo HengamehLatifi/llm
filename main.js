@@ -1,4 +1,11 @@
 #! /usr/bin/env node
+
+/** 
+ * @file main
+ * This JavaScript file sets up a command-line interface (CLI) tool named llm using the yargs library
+ * to manage interactions with large language models (LLMs) like GPT from OpenAI.
+ * It allows users to execute language model prompts directly from the command line.
+*/
 import yargs from "yargs"
 import { hideBin } from "yargs/helpers"
 import "colors"
@@ -7,14 +14,25 @@ import dotenv from "dotenv"
 import { relativeDate } from "./utils.js"
 import { openai, initOpenai } from "./apis/openai/api.js"
 import { useLlm } from "./lib.js"
+
+/**
+ * To load environment variables from a .`env` file into `process.env`
+ * @function
+ */
 dotenv.config()
 
 export * from "./lib.js"
 
 // directory of this file
+/**
+ * Gives the URL of the current module.
+ */
 let __dirname = new URL(".", import.meta.url).pathname
 
 // if windows
+/**
+ * If the operating system is windows then modifies the `__dirname` path format specifically for compatibility reasons on Windows systems.
+ */
 const isWindows = process.platform === "win32"
 if (isWindows) {
   // /C:/ -> /c/
@@ -23,6 +41,26 @@ if (isWindows) {
   })
 }
 
+/**
+ * Configure and run commands related to interacting with large language models (LLMs).
+ * The script allows for extensive customization of model parameters, input methods, and output preferences.
+ *
+ * @scriptName "llm" - Names the script 'llm' to be used in command line invocation.
+ * @command "$0 <prompt>" - The default command to execute when no specific sub-command is provided.
+ * @description "Use large language models" - Describes the primary function of the command.
+ * @option "model" - Specifies the language model to use. Possible values include names like 'text-davinci-003', 'bing', etc.
+ * @option "temperature" - Sets the creativity or randomness level of the output.
+ * @option "system" - Provides a system-level context or prompt to the model.
+ * @option "max-tokens" - Limits the number of tokens (words/pieces of words) the model generates.
+ * @option "file" - Determines if the prompt should be read from a specified file path instead of direct input.
+ * @option "quiet" - Controls whether to suppress all output except the completion.
+ * @option "verbose" - Enables verbose output during execution, providing more detailed information about the process.
+ * @option "plugins" - Enables the use of plugins for processing requests.
+ * @option "chain" - Enables the chaining of commands or files for sequential processing.
+ * @option "interpret" - Enables an interpreter mode that processes embedded commands within the prompt.
+ * @action async (args) => { return await useLlm(args) } - Defines the action to be executed when the command is invoked.
+ *                                                       This action utilizes the 'useLlm' function, passing in the parsed arguments.
+ */
 yargs(hideBin(process.argv))
   .scriptName("llm")
   .command(
@@ -91,6 +129,13 @@ yargs(hideBin(process.argv))
       return await useLlm(args)
     }
   )
+
+  /** 
+ * Command to list all models.
+ * @command
+ * @param {object} yargs - The yargs instance.
+ * @param {object} args - The command arguments.
+ */
   .command(
     "ls",
     "List all models",
@@ -120,4 +165,9 @@ yargs(hideBin(process.argv))
       )
     }
   )
+  
+  /** 
+  Parse the command-line arguments and execute the command based on the input.
+  @type {method}
+ */
   .parse()

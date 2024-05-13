@@ -1,3 +1,8 @@
+/** 
+ * This code provides functions to initialize connections, handle model selection, and manage the execution of text completion tasks based on user inputs.
+ * @file lib 
+ */ 
+
 import "colors"
 import { MODELS } from "./constants.js"
 import fs from "fs"
@@ -8,21 +13,57 @@ import { useOpenai, useOpenaiChat } from "./apis/openai/api.js"
 import { useBing } from "./apis/bing/api.js"
 import { useHuggingface } from "./apis/huggingface/api.js"
 import { $ } from "zx"
+
+/**
+ * @type {boolean}
+ */
 $.verbose = false
 dotenv.config()
 
 // directory of this file
+/**
+ * The directory path of the current module.
+ * @type {string}
+ */
 let __dirname = new URL(".", import.meta.url).pathname
 
 // if windows
+/**
+ * Checks if the code is running on a Windows operating system.
+ * @type {boolean}
+ */
 const isWindows = process.platform === "win32"
 if (isWindows) {
   // /C:/ -> /c/
+  /**
+ * Normalizes the Windows drive letter in a file path to lowercase for case-sensitive environments.
+ * @param {string} `__dirname`
+ * @returns {string}
+ */
   __dirname = __dirname.replace(/^\/([A-Z]):/, (match, p1) => {
     return "/" + p1.toLowerCase()
   })
 }
 
+/**
+ * Handles interaction with various language models to generate text based on provided arguments.
+ * @function
+ * @param {Object} args - Configuration and execution parameters:
+ * @param {boolean|string} args.file - If true, reads the prompt from a file specified by `args.prompt`. If a string, reads from the file path specified.
+ * @param {string} args.prompt - The input prompt or the path to the file containing the prompt, depending on `args.file`.
+ * @param {number} [args.temperature=0] - Controls randomness in the output generation.
+ * @param {string} [args.system=""] - System context used for initializing scenarios in some models.
+ * @param {string} [args.model="gpt-3.5-turbo-0613"] - Specifies the model used for generating completions.
+ * @param {number} [args.backoff=2000] - Initial backoff time in ms for handling rate limits or temporary API unavailability.
+ * @param {boolean} [args.quiet=false] - Suppresses logs and some outputs if true.
+ * @param {boolean} [args.interpret=false] - Processes embedded commands in the prompt if true.
+ * @param {boolean} [args.chain=false] - Processes linked files in the prompt if true.
+ * @param {boolean} [args.plugins=false] - Uses external plugins for processing if true.
+ * @param {Object} [args.vars] - Variables used in processing embedded commands.
+ * @param {boolean} [args.silent] - Overrides `args.quiet` within specific operations, usually set internally.
+ * @param {boolean} [args.verbose] - Provides detailed output during plugin operations.
+ * @returns {Promise<string|void>} - The generated text completion or processed result.
+ */
 export async function useLlm(args) {
   if (args.file === true) {
     args.prompt = fs.readFileSync(args.prompt, "utf8")
@@ -319,6 +360,12 @@ export async function useLlm(args) {
   }
 }
 
+/**
+ * Is a simplified wrapper for the `useLlm` function and streamlines the use of `useLlm` by pre-setting certain parameters for silent operation.
+ * @param {string} prompt 
+ * @param {object} options 
+ * @returns {string}
+ */
 export const llm = async (prompt, options) => {
   return await useLlm({ prompt, quiet: true, silent: true, ...options })
 }

@@ -10,6 +10,13 @@
   "bin": {
     "llm": "./main.js"
   },
+  "scripts": {
+    "jsdoc": "jsdoc -c jsdoc.json"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.10",
+    "jsdoc": "^4.0.3"
+  },
   "dependencies": {
     "bing-chat": "^0.2.3",
     "colors": "^1.4.0",

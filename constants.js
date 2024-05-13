@@ -1,3 +1,7 @@
+/** 
+ * Defines the supported models and the type of the API that should be used. 
+ * @type {object}
+*/
 export const MODELS = {
   ada: { kind: "openai" },
   babbage: { kind: "openai" },

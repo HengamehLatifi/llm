@@ -5,3 +5,4 @@ models/inferences
 *.compiled
 .DS_Store
 README.next.md
+.vscode/settings.json
