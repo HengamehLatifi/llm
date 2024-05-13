@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: main.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: main.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>#! /usr/bin/env node
+
+// This JavaScript file sets up a command-line interface (CLI) tool named llm using the yargs library
+// to manage interactions with large language models (LLMs) like GPT from OpenAI.
+// It allows users to execute language model prompts directly from the command line, 
+// offering options to specify the model, control output randomness (temperature), and handle prompt input either directly or from a file. 
+
+/** @module main */
+import yargs from "yargs"
+import { hideBin } from "yargs/helpers"
+import "colors"
+import { MODELS } from "./constants.js"
+import dotenv from "dotenv"
+import { relativeDate } from "./utils.js"
+import { openai, initOpenai } from "./apis/openai/api.js"
+import { useLlm } from "./lib.js"
+
+/**
+ * To load environment variables from a .`env` file into `process.env`
+ * @function
+ */
+dotenv.config()
+
+export * from "./lib.js"
+
+// directory of this file
+/**
+ * Gives the URL of the current module.
+ */
+let __dirname = new URL(".", import.meta.url).pathname
+
+// if windows
+/**
+ * If the operating system is windows then modifies the `__dirname` path format specifically for compatibility reasons on Windows systems.
+ */
+const isWindows = process.platform === "win32"
+if (isWindows) {
+  // /C:/ -> /c/
+  __dirname = __dirname.replace(/^\/([A-Z]):/, (match, p1) => {
+    return "/" + p1.toLowerCase()
+  })
+}
+
+/**
+ * Configure and run commands related to interacting with large language models (LLMs).
+ * `$0 &lt;prompt>`: This command is set up to use large language models with various options. Users can specify:
+ *  `model` (the model to use, with a default pulled from the environment or set to "gpt-3.5-turbo"),
+ *  `temperature` (affects the randomness of the responses, defaulting to 0),
+ *  `system` (a system prompt string),
+ *  `max-tokens `(the maximum number of tokens to generate, default is null),
+ *  `file` (reads the prompt from a file path),
+ *  `quiet` (if true, prints only the completion),
+ *  `verbose` (provides more detailed output),
+ *  `plugins` (enables the use of plugins),
+ *  `chain` (enables chaining of outputs),
+ *   `interpret` (enables an interpreter).
+ */
+yargs(hideBin(process.argv))
+  .scriptName("llm")
+  .command(
+    "$0 &lt;prompt>",
+    "Use large language models",
+    (yargs) => {
+      yargs.option("model", {
+        describe: "text-davinci-003,bing,...",
+        default: process.env.LLM_DEFAULT_MODEL || "gpt-3.5-turbo",
+        alias: "m",
+      })
+      yargs.option("temperature", {
+        describe: "temperature",
+        default: 0,
+        alias: "t",
+        number: true,
+      })
+      yargs.option("system", {
+        describe: "system prompt",
+        default: "",
+        alias: "s",
+      })
+      yargs.option("max-tokens", {
+        describe: "max tokens",
+        default: null,
+        alias: "T",
+      })
+      yargs.option("file", {
+        describe: "read prompt as ./path/to/file.txt",
+        default: false,
+        boolean: true,
+        alias: "f",
+      })
+      yargs.option("quiet", {
+        describe: "print only the completion",
+        default: true,
+        boolean: true,
+        alias: "q",
+      })
+      yargs.option("verbose", {
+        describe: "verbose output",
+        default: false,
+        boolean: true,
+        alias: "v",
+      })
+      yargs.option("plugins", {
+        describe: "use plugins",
+        default: false,
+        boolean: true,
+        alias: "P",
+      })
+      yargs.option("chain", {
+        describe: "use chaining",
+        default: false,
+        boolean: true,
+        alias: "C",
+      })
+      yargs.option("interpret", {
+        describe: "use intrepreter",
+        default: false,
+        boolean: true,
+        alias: "I",
+      })
+    },
+    async (args) => {
+      return await useLlm(args)
+    }
+  )
+
+  /** 
+ * List Command (`ls`): This command lists all available models, initializes an OpenAI connection and fetches model details, sorting them by creation date. 
+ * The output includes each model's ID and the relative creation date. It also notes the availability of models from `huggingface.co/models`.
+ */
+  .command(
+    "ls",
+    "List all models",
+    (yargs) => {},
+    async (args) => {
+      initOpenai()
+      const models = (await openai.listModels()).data.data.sort(
+        (a, b) => a.created - b.created
+      )
+
+      for (const model in MODELS) {
+        if (models.map((e) => e.id).indexOf(model) === -1) {
+          models.push({ id: model })
+        }
+      }
+
+      console.log(
+        models
+          .map(
+            (e) =>
+              `${e.id.padEnd(36)} ${e.created ? relativeDate(e.created) : ""}`
+          )
+          .join("\n")
+      )
+      console.log(
+        "\nnote: plus any text-generation model from huggingface.co/models".gray
+      )
+    }
+  )
+  
+  /** 
+  `.parse()` method is called to parse the command-line arguments and execute the command based on the input.
+ */
+  .parse()
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Bing.html">Bing</a></li><li><a href="module-constants.html">constants</a></li><li><a href="module-HuggingFace.html">HuggingFace</a></li><li><a href="module-lib.html">lib</a></li><li><a href="module-main.html">main</a></li><li><a href="module-OpenAI.html">OpenAI</a></li><li><a href="module-utils.html">utils</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon May 13 2024 13:55:43 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
