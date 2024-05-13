@@ -42,6 +42,264 @@
 
 
 
+    <section>
+        <article><h1>llm: language models usage made easy</h1>
+<p>Manipulate any language model from the command line.</p>
+<p>From <a href="#features">simple to advanced usage</a>.</p>
+<pre class="prettyprint source"><code>$ llm &quot;Hello world.&quot;
+Hello there! How can I assist you today?
+</code></pre>
+<p>Leave a ⭐ star to support the project.</p>
+<h2>Models</h2>
+<blockquote>
+<p>Some models are still being added. This is a work in progress.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Model Name</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EVERY OpenAI model</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>gpt-3.5-turbo</td>
+<td>✅</td>
+<td>ChatGPT</td>
+</tr>
+<tr>
+<td>gpt-4</td>
+<td>✅</td>
+<td>GPT-4 via API (<a href="https://openai.com/waitlist/gpt-4-api">waitlist</a>)</td>
+</tr>
+<tr>
+<td>text-davinci-003</td>
+<td>✅</td>
+<td>InstructGPT (GPT-3)</td>
+</tr>
+<tr>
+<td>llama2</td>
+<td>✅</td>
+<td>Meta's Llama 2</td>
+</tr>
+<tr>
+<td>bing-chat</td>
+<td>✅</td>
+<td>Bing Chat: creative, balanced, precise</td>
+</tr>
+<tr>
+<td>bert</td>
+<td>✅</td>
+<td>BERT by Google</td>
+</tr>
+<tr>
+<td>llama-7b-hf</td>
+<td>✅</td>
+<td>Famous llama model</td>
+</tr>
+<tr>
+<td>wizardlm-13b-uncensored</td>
+<td>✅</td>
+<td>WizardLM 30B</td>
+</tr>
+<tr>
+<td>guanaco-65b-gptq</td>
+<td>✅</td>
+<td>Guanaco 65B</td>
+</tr>
+<tr>
+<td>bard</td>
+<td>🔄</td>
+<td>Google Bard</td>
+</tr>
+<tr>
+<td>... HuggingFace 🤗 models</td>
+<td>✅</td>
+<td>every <a href="https://huggingface.co/models?pipeline_tag=text-generation&amp;sort=downloads">text-generation</a> model</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#add-any-model">Other models can be installed</a> using the <code>--install</code> command.</p>
+<h2>Features</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prompt</td>
+<td>✅</td>
+<td>Prompt model with default parameters</td>
+</tr>
+<tr>
+<td>Parameterization</td>
+<td>✅</td>
+<td><em>temperature, max-length, top-p, top-k, ...</em></td>
+</tr>
+<tr>
+<td>ChatGPT Plugins</td>
+<td>🔄</td>
+<td>Use chatGPT plugins. web-pilot working, global plugin system in development</td>
+</tr>
+<tr>
+<td>Use files</td>
+<td>✅</td>
+<td>Query models using prompt files</td>
+</tr>
+<tr>
+<td>Prompt chaining</td>
+<td>✅</td>
+<td>Call prompts like functions</td>
+</tr>
+<tr>
+<td>Prompt templating</td>
+<td>🔄</td>
+<td>Use variables in prompt files</td>
+</tr>
+</tbody>
+</table>
+<h2>Getting started</h2>
+<pre class="prettyprint source"><code>git clone https://github.com/snwfdhmp/llm && cd llm
+yarn install
+</code></pre>
+<p>make an alias <code>llm</code></p>
+<pre class="prettyprint source"><code>alias llm=&quot;node $(pwd)/main.js&quot;
+</code></pre>
+<blockquote>
+<p>add it to your <code>.bashrc</code> or <code>.zshrc</code> to make it permanent.</p>
+</blockquote>
+<p><strong>You're ready to go ! Try:</strong></p>
+<pre class="prettyprint source"><code>$ llm &quot;Hello world&quot;
+$ llm -m bing-creative &quot;Tell me a joke&quot;
+$ llm -m gpt-3.5-turbo &quot;Tell me a joke&quot;
+</code></pre>
+<h2>Usage</h2>
+<blockquote>
+<p>Simple prompting with defaults parameters</p>
+</blockquote>
+<pre class="prettyprint source"><code>$ llm &quot;what is the meaning of life?&quot;
+</code></pre>
+<blockquote>
+<p>Use a specific model</p>
+</blockquote>
+<pre class="prettyprint source"><code>$ llm -m bing-creative &quot;find project ideas to learn react&quot;
+</code></pre>
+<blockquote>
+<p>Use custom parameters</p>
+</blockquote>
+<pre class="prettyprint source"><code>$ llm --max-length 512 --temperature 1 --top-p 0.9 --top-k 60 &quot;follow the instructions.&quot;
+</code></pre>
+<blockquote>
+<p>List available models</p>
+</blockquote>
+<pre class="prettyprint source"><code>$ llm ls
+Name                LastUsedAt     Author      Description
+text-davinci-003    2021-10-10     OpenAI      InstructGPT by OpenAI
+gpt-3.5-turbo       2021-10-10     OpenAI      ChatGPT by OpenAI
+gpt-4-web           2021-10-10     OpenAI      GPT-4 by OpenAI via chatGPT
+llama               2021-10-10     Meta        Meta's Llama
+bard                2021-10-10     Google      Google Bard
+...
+</code></pre>
+<blockquote>
+<p>Use files as prompts</p>
+</blockquote>
+<pre class="prettyprint source"><code>$ llm -f ./prompt.txt
+</code></pre>
+<p>Incoming:</p>
+<ul>
+<li>Conversation system (remember past messages)</li>
+<li>Install 3rd party models</li>
+<li>Chaining</li>
+</ul>
+<pre class="prettyprint source"><code>$ llm -s session_name &quot;what is the meaning of life?&quot;
+remembers past messages
+$ llm --install github.com/snwfhdmp/llm-descriptor-llama
+downloads model from github
+</code></pre>
+<h2>Add any model</h2>
+<p>Any model can be plugged into <code>llm</code> using a model descriptor.</p>
+<p><strong>Example of a model descriptor which requires installation</strong></p>
+<pre class="prettyprint source lang-yaml"><code>kind: llm/descriptor/v1
+metadata:
+    name: llama
+model:
+    install: |
+        git clone ...
+        cd ...
+        ./install.sh
+        # or
+        docker pull ...
+        # or
+        none
+    usage:
+        ./model-executor -f model.bin $LLM_PARAM_PROMPT
+    parameters:
+        LLM_PARAM_PROMPT:
+            type: string
+            description: The prompt to use
+            default: &quot;Hello world&quot;
+        LLM_PARAM_MAX_TOKENS:
+            type: int
+            description: The maximum length of context
+            default: 100
+        LLM_PARAM_TEMPERATURE:
+            type: float
+            description: The temperature of the model
+            default: 0.7
+</code></pre>
+<p><strong>Example of a model descriptor which uses an API</strong></p>
+<pre class="prettyprint source lang-yaml"><code>kind: llm/descriptor/v1
+metadata:
+    name: llama
+model:
+    install: |
+        read -p &quot;Enter your API key:&quot; LLM_API_KEY
+        echo &quot;LLM_API_KEY=$LLM_API_KEY&quot; >> ~/.bashrc
+    usage: curl -s $LLM_PARAM_API_TARGET_URL -d &quot;prompt=$LLM_PARAM_PROMPT&api_key=$LLM_API_KEY&quot;
+    parameters:
+        LLM_PARAM_API_TARGET_URL:
+            type: string
+            description: The URL of the API
+            default: &quot;https://api.llm.com&quot;
+        LLM_PARAM_PROMPT:
+            type: string
+            description: The prompt to use
+            default: &quot;Hello world&quot;
+        LLM_PARAM_MAX_TOKENS:
+            type: int
+            description: The maximum length of context
+            default: 100
+        LLM_PARAM_TEMPERATURE:
+            type: float
+            description: The temperature of the model
+            default: 0.7
+</code></pre>
+<h2>Env variables</h2>
+<p>These variables can be used to tweak <code>llm</code> behavior.</p>
+<ul>
+<li><code>LLM_DEFAULT_MODEL</code> - The default model to use when no model is specified</li>
+<li><code>LLM_ENABLED_PLUGINS</code> - A comma-separated list of plugins to enable</li>
+<li><code>OPENAI_ORGANIZATION_ID</code> - The organization ID to use for OpenAI models</li>
+</ul>
+<h2>Roadmap</h2>
+<p>Project vision and information can be found in <a href="docs/">docs</a>.</p>
+<h2>Contributing</h2>
+<p>Contribute easily by leaving a ⭐ star to the project.</p>
+<p>Code contributions are welcome. Please open an issue or a pull request.</p>
+<p>Join the team at <a href="https://discord.gg/ccDghPeAT9">discord.gg/ccDghPeAT9</a>.</p></article>
+    </section>
+
 
 
 
@@ -56,7 +314,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon May 13 2024 13:55:43 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon May 13 2024 14:07:54 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
