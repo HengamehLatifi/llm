@@ -29,6 +29,8 @@
 <header>
     
         
+            
+        
     
 </header>
 
@@ -36,6 +38,84 @@
     <div class="container-overview">
     
         
+            <div class="description"><p>This module defines a setup in JavaScript to execute shell commands and interact with a Python script for using a Hugging Face machine learning models.</p></div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="apis_huggingface_api.js.html">apis/huggingface/api.js</a>, <a href="apis_huggingface_api.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         
     
@@ -58,26 +138,16 @@
 
         
             
-<h4 class="name" id=".useHuggingface"><span class="type-signature">(static, constant) </span>useHuggingface<span class="type-signature"> :function</span></h4>
+<h4 class="name" id="~__dirname"><span class="type-signature">(inner) </span>__dirname<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    <p>is an asynchronous function designed to interact with a Hugging Face model by invoking a Python script.</p>
+    <p>Gets the directory path of the current module.</p>
 </div>
 
 
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">function</span>
-
-
-        </li>
-    </ul>
 
 
 
@@ -112,7 +182,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="apis_huggingface_api.js.html">apis/huggingface/api.js</a>, <a href="apis_huggingface_api.js.html#line47">line 47</a>
+        <a href="apis_huggingface_api.js.html">apis/huggingface/api.js</a>, <a href="apis_huggingface_api.js.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -136,8 +206,7 @@
 
 
 <div class="description">
-    <p>Creates a URL object representing the directory of the current module to the current directory, and provides the URL of the current module as a file
-and extracts the path of the URL.</p>
+    <p>Normalizes the Windows drive letter in a file path to lowercase for case-sensitive environments.</p>
 </div>
 
 
@@ -175,7 +244,7 @@ and extracts the path of the URL.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="apis_huggingface_api.js.html">apis/huggingface/api.js</a>, <a href="apis_huggingface_api.js.html#line21">line 21</a>
+        <a href="apis_huggingface_api.js.html">apis/huggingface/api.js</a>, <a href="apis_huggingface_api.js.html#line43">line 43</a>
     </li></ul></dd>
     
 
@@ -193,13 +262,14 @@ and extracts the path of the URL.</p>
 
         
             
-<h4 class="name" id="~__dirname"><span class="type-signature">(inner) </span>__dirname<span class="type-signature"></span></h4>
+<h4 class="name" id="~execPromise"><span class="type-signature">(inner, constant) </span>execPromise<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    <p>a direct operation on a variable to search within the directory name string for the first capital letter ([A-Z]) that appears at the beginning of the string (/^).</p>
+    <p>Executes a shell command and returns a promise that resolves with the result of the command.
+This function is a promisified version of <code>child_process.exec</code>.</p>
 </div>
 
 
@@ -237,7 +307,7 @@ and extracts the path of the URL.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="apis_huggingface_api.js.html">apis/huggingface/api.js</a>, <a href="apis_huggingface_api.js.html#line38">line 38</a>
+        <a href="apis_huggingface_api.js.html">apis/huggingface/api.js</a>, <a href="apis_huggingface_api.js.html#line20">line 20</a>
     </li></ul></dd>
     
 
@@ -261,7 +331,7 @@ and extracts the path of the URL.</p>
 
 
 <div class="description">
-    <p>This block checks if the code is running on a Windows operating system.</p>
+    <p>Checks if the code is running on a Windows operating system.</p>
 </div>
 
 
@@ -309,7 +379,7 @@ and extracts the path of the URL.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="apis_huggingface_api.js.html">apis/huggingface/api.js</a>, <a href="apis_huggingface_api.js.html#line29">line 29</a>
+        <a href="apis_huggingface_api.js.html">apis/huggingface/api.js</a>, <a href="apis_huggingface_api.js.html#line34">line 34</a>
     </li></ul></dd>
     
 
@@ -337,7 +407,7 @@ and extracts the path of the URL.</p>
     
 
     
-    <h4 class="name" id="~execPromise"><span class="type-signature">(inner) </span>execPromise<span class="signature">()</span><span class="type-signature"> &rarr; {promise}</span></h4>
+    <h4 class="name" id=".useHuggingface"><span class="type-signature">(static) </span>useHuggingface<span class="signature">(options)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span></h4>
     
 
     
@@ -345,7 +415,7 @@ and extracts the path of the URL.</p>
 
 
 <div class="description">
-    <p>excutes a shell command and returns a <code>promise</code> that resolves with the result.</p>
+    <p>Interact with a Hugging Face model by invoking a Python script.</p>
 </div>
 
 
@@ -354,6 +424,222 @@ and extracts the path of the URL.</p>
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The options for the function.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>print</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>To print output to the console.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Arguments for the function execution:</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>quiet</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>If true, suppresses print output.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>model</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The Hugging Face model identifier.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>prompt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The text prompt to send to the model.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -389,7 +675,7 @@ and extracts the path of the URL.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="apis_huggingface_api.js.html">apis/huggingface/api.js</a>, <a href="apis_huggingface_api.js.html#line14">line 14</a>
+        <a href="apis_huggingface_api.js.html">apis/huggingface/api.js</a>, <a href="apis_huggingface_api.js.html#line59">line 59</a>
     </li></ul></dd>
     
 
@@ -417,6 +703,10 @@ and extracts the path of the URL.</p>
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    <p>A promise that resolves to the Python script's output.</p>
+</div>
+
 
 
 <dl>
@@ -425,7 +715,7 @@ and extracts the path of the URL.</p>
     </dt>
     <dd>
         
-<span class="param-type">promise</span>
+<span class="param-type">Promise.&lt;string></span>
 
 
     </dd>
@@ -459,7 +749,7 @@ and extracts the path of the URL.</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon May 13 2024 20:37:06 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue May 14 2024 09:51:06 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
